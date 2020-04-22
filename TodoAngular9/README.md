@@ -15,3 +15,4 @@ vers https://jsonplaceholder.typicode.com/todos
 Dans le composant App, appeler votre méthode getAll
 pour préremplir l'application avec les todos du serveur
 
+Pensez à importer HttpClientModule (package @angular/common/http) depuis AppModule (pour avoir accès à HttpClient)
