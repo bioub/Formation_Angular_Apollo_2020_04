@@ -1,0 +1,27 @@
+<form [ngClass]="{submitted: contactForm.submitted}"
+      (submit)="contactForm.valid && addContact()"
+      #contactForm="ngForm">
+  <div class="form-group">
+    <label>{{'First name' | translate}}</label>
+    <input class="form-control" name="firstName" required [(ngModel)]="contact.firstName" #firstName="ngModel" [ngClass]="{'is-invalid': firstName.invalid && (firstName.touched || contactForm.submitted)}">
+    <div class="invalid-feedback" *ngIf="firstName.invalid && (firstName.touched || contactForm.submitted)">
+      {{'First name is required' | translate}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label>{{'Last name' | translate}}</label>
+    <input class="form-control" name="lastName" required [(ngModel)]="contact.lastName" #lastName="ngModel" [ngClass]="{'is-invalid': lastName.invalid && (lastName.touched || contactForm.submitted)}">
+    <div class="invalid-feedback" *ngIf="lastName.invalid && (lastName.touched || contactForm.submitted)">
+      {{'Last name is required' | translate}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label>{{'Email' | translate}}</label>
+    <input type="email" class="form-control" name="email" [(ngModel)]="contact.email">
+  </div>
+  <div class="form-group">
+    <label>{{'Telephone' | translate}}</label>
+    <input type="tel" class="form-control" name="telephone" [(ngModel)]="contact.telephone">
+  </div>
+  <button type="submit" class="btn btn-primary">{{'Add' | translate}}</button>
+</form>
