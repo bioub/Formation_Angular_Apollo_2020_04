@@ -8,17 +8,18 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class MenuComponent implements OnInit {
 
-  public open = false;
-  public lang = 'en';
+  open = false;
+  lang = 'en';
+  langages = ['en', 'fr'];
 
   constructor(private translateService: TranslateService) { }
 
   ngOnInit() {
   }
 
-  switchLang() {
-    this.lang = this.lang === 'en' ? 'fr' : 'en';
-    this.translateService.use(this.lang);
+  switchLang(selectedLang) {
+    this.lang = selectedLang;
+    this.translateService.use(selectedLang);
   }
 
 }

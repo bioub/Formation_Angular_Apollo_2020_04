@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ContactService } from './services/contact/contact.service';
+import { FakeContactService } from './services/contact/fake-contact.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,7 +36,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     // A faire dans les tests
     // { provide: ContactService, useClass: FakeContactService },
-    ContactService,
+    { provide: ContactService, useClass: ContactService }
+    // ContactService,
   ],
   exports: [
     NotFoundComponent,
