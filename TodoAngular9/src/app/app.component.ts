@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { TodoService } from './todo.service';
+import { Todo } from './todo.model';
 
 @Component({
   selector: 'todo-root',
@@ -6,10 +8,29 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public todos = ['Item 1', 'Item 2', 'Item 3'];
+  todos: Todo[] = [];
 
-  public handleNewTodo(todo) {
-    this.todos = [todo, ...this.todos];
+  // private todoService: TodoService;
+  // constructor(todoService: TodoService) {
+  //   this.todoService = todoService;
+  // }
+
+  constructor(private todoService: TodoService) {}
+
+  ngOnInit() {
+    this.todoService.getAll().subscribe((data) => {
+      this.todos = data;
+    });
+
+  }
+
+  handleNewTodo(todo: Todo) {
+    // this.todos.unshift(todo); // changement muable
+    this.todos = [todo, ...this.todos]; // changement immuable
+  }
+
+  handleDeleteTodo(todo: Todo) {
+    this.todos = this.todos.filter((t) => t.id !== todo.id);
   }
 
   ngDoCheck(): void {

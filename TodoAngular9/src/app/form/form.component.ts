@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, DoCheck, ChangeDetectionStrategy } from '@angular/core';
+import { Todo } from '../todo.model';
 
 @Component({
   selector: 'todo-form',
@@ -8,12 +9,24 @@ import { Component, OnInit, EventEmitter, Output, DoCheck, ChangeDetectionStrate
 })
 export class FormComponent implements DoCheck {
 
-  @Output()
-  public onAddTodo = new EventEmitter<string>();
-  public todo: string;
+  @Output() add = new EventEmitter<Todo>();
+
+
+  public todo: Todo = {
+    title: '',
+    completed: false,
+  };
+  // public todo: Partial<Todo> = {
+  //   title: '',
+  //   completed: false,
+  // };
 
   public addTodo() {
-    this.onAddTodo.emit(this.todo);
+    // emet la référence de l'objet
+    // this.add.emit(this.todo);
+
+    // emet la copie de l'objet
+    this.add.emit({...this.todo});
   }
 
   ngDoCheck(): void {

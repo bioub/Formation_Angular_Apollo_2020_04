@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, DoCheck, Output, EventEmitter } from '@angular/core';
+import { Todo } from '../todo.model';
 
 @Component({
   selector: 'todo-item',
@@ -8,11 +9,14 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, DoCheck } from '@ang
 })
 export class ItemComponent implements DoCheck {
 
-  @Input()
-  public todo: string;
+  @Input() public todo: Todo;
+  @Output() delete = new EventEmitter<Todo>();
 
   ngDoCheck(): void {
     console.log('ItemComponent checked');
   }
 
+  handleDelete(todo) {
+    this.delete.emit(todo);
+  }
 }

@@ -36,7 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     // A faire dans les tests
     // { provide: ContactService, useClass: FakeContactService },
-    { provide: ContactService, useClass: ContactService }
+    { provide: ContactService, useClass: ContactService },
     // ContactService,
   ],
   exports: [
