@@ -27,7 +27,7 @@ export class ContactsAddComponent implements OnInit {
     this.contactService.create$(this.contact)
       .subscribe((contact: Contact) => {
         this.router.navigate(['contacts', contact.id]);
-        this.contactService.events.emit('contact.write');
+        this.contactService.events.emit('refresh');
       });
   }
 }

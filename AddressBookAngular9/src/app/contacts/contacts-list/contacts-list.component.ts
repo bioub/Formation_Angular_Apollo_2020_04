@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
-import { filter } from 'rxjs/operators';
+import { filter, startWith, switchMap, tap, catchError, finalize } from 'rxjs/operators';
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../../shared/models/contact';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ab-contacts-list',
@@ -12,7 +13,9 @@ import { Contact } from '../../shared/models/contact';
   styleUrls: ['./contacts-list.component.scss'],
 })
 export class ContactsListComponent implements OnInit {
-  public contacts: Contact[] = [];
+  public contacts$: Observable<Contact[]>;
+
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,15 +36,20 @@ export class ContactsListComponent implements OnInit {
     // initialiser events avec un première valeur 'contact.write' (startWith)
     // utiliser switchMap pour déclencher la requete avec this.contactService.getList$()
     */
-    this.refreshList();
-    this.contactService.events
-      .pipe(filter((e) => e === 'contact.write'))
-      .subscribe((e) => this.refreshList());
-  }
 
-  public refreshList() {
-    this.contactService.getList$().subscribe((contacts) => {
-      this.contacts = contacts;
-    });
+    // -----------(refresh)-----(reload)----(refresh)----...
+    // startWith('refresh'),
+    // (refresh)--(refresh)-----(reload)----(refresh)----...
+    // filter((e) => e === 'refresh'),
+    // (refresh)--(refresh)-----------------(refresh)----...
+
+    this.contacts$ = this.contactService.events
+      .pipe(
+        startWith('refresh'),
+        filter((e) => e === 'refresh'),
+        tap(() => this.loading = true),
+        switchMap(() => this.contactService.getList$()),
+        finalize(() => this.loading = false),
+      );
   }
 }

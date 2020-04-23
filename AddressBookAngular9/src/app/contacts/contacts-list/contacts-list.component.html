@@ -2,13 +2,13 @@
   <div class="col-md-3">
     <div class="list-group mb-3">
       <a class="list-group-item list-group-item-action"
-         *ngFor="let c of contacts"
+         *ngFor="let c of contacts$ | async"
          routerLinkActive="active"
          [routerLink]="[c.id]">
         {{c.firstName}} {{c.lastName}}
       </a>
       <li class="list-group-item text-center">
-        {{contacts.length}} contacts
+        {{(contacts$ | async).length}} contacts
       </li>
     </div>
   </div>

@@ -5,6 +5,7 @@ import { ContactService } from '../services/contact.service';
 import { Contact } from './../../shared/models/contact';
 
 import {map, switchMap, flatMap} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ab-contacts-show',
@@ -12,7 +13,7 @@ import {map, switchMap, flatMap} from 'rxjs/operators';
   styleUrls: ['./contacts-show.component.scss']
 })
 export class ContactsShowComponent implements OnInit {
-  public contact: Contact;
+  public contact$: Observable<Contact>;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,13 +21,10 @@ export class ContactsShowComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.pipe(
+    this.contact$ = this.route.params.pipe(
       map(params => Number(params.id)),
       switchMap((id: number) => this.contactService.getById$(id)),
-    )
-      .subscribe(contact => {
-        this.contact = contact;
-      });
+    );
     // this.route.params.subscribe((params) => {
     //   this.contactService.getById$(Number(params.id)).subscribe((contact) => {
     //     this.contact = contact;

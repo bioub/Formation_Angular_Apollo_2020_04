@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { ContactsModule } from './contacts/contacts.module';
 import { FakeContactService } from './contacts/services/fake-contact.service';
 import { ContactService } from './contacts/services/contact.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -39,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     ContactsModule,
     AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
   //  {provide: ContactService, useExisting: FakeContactService}
