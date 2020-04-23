@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "AddressBookAngular9"
+		},
+		{
+			"path": "RxJS-Avancé"
 		}
 	],
 	"settings": {}

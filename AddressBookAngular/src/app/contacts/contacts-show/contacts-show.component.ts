@@ -25,6 +25,10 @@ export class ContactsShowComponent implements OnInit {
       .subscribe(contact => {
         this.contact = contact;
       });
+
+    // ------1-----2--1----------2-------...
+    // switchMap
+    // --------({id:1})------({id:1})----------({id:2})-------...
   }
 
 }

@@ -11,6 +11,8 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContactsModule } from './contacts/contacts.module';
+import { FakeContactService } from './contacts/services/fake-contact.service';
+import { ContactService } from './contacts/services/contact.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,7 +40,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ContactsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+  //  {provide: ContactService, useExisting: FakeContactService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

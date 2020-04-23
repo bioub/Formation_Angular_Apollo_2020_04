@@ -1,7 +1,11 @@
 $baseColor: lightgoldenrodyellow;
 
-:host {
+.viewport {
+  height: 300px;
+}
+
   todo-item {
+    height: 30px;
     background: green;
 
     &:nth-child(even) {
@@ -12,6 +16,6 @@ $baseColor: lightgoldenrodyellow;
       background: blue;
     }
   }
-}
+
 
 

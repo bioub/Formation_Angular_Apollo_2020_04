@@ -1,1 +1,7 @@
-<todo-item *ngFor="let t of todos" [todo]="t" (delete)="handleDelete($event)"></todo-item>
+<cdk-virtual-scroll-viewport [itemSize]="50" class="viewport">
+  <todo-item
+    *cdkVirtualFor="let t of todos"
+    [todo]="t"
+    (delete)="handleDelete($event)"
+  ></todo-item>
+</cdk-virtual-scroll-viewport>

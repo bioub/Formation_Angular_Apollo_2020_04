@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ContactService } from '../services/contact.service';
 import { Contact } from './../../shared/models/contact';
 
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, flatMap} from 'rxjs/operators';
 
 @Component({
   selector: 'ab-contacts-show',
@@ -27,6 +27,11 @@ export class ContactsShowComponent implements OnInit {
       .subscribe(contact => {
         this.contact = contact;
       });
+    // this.route.params.subscribe((params) => {
+    //   this.contactService.getById$(Number(params.id)).subscribe((contact) => {
+    //     this.contact = contact;
+    //   });
+    // });
   }
 
 }

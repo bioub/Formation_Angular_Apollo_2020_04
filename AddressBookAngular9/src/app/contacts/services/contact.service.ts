@@ -17,6 +17,9 @@ export class ContactService implements ContactServiceInterface {
   ) { }
 
   public getList$(): Observable<Contact[]> {
+    // Utiliser un replaysubject de taille 1
+    // pour mettre en cache les résultats
+
     return this.http.get<Contact[]>(
       `${environment.apiServer}/contacts`,
     );
