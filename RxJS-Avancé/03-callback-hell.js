@@ -11,6 +11,7 @@ try {
 
 // Async
 // Callback Hell / Pyramid of doom
+// callbackhell.com
 fs.readFile('.prettierrc', { encoding: 'utf-8' }, (err, content) => {
   if (err) {
     console.log(err);
@@ -60,4 +61,12 @@ copy();
 //   console.log('Copy sync done');
 // } catch (err) {
 //   console.log(err);
+// }
+
+// async iterator ES2018
+// for await (const line of readFileByLine('.prettierrc')) {
+//
+// }
+// for await (const params of this.activatedRoute.params) {
+//    await this.contactService.getById(params.id);
 // }

@@ -2,7 +2,7 @@ const { interval, BehaviorSubject } = require('rxjs');
 
 const interval$ = interval(1000)
 
-const subject$ = new BehaviorSubject('x');
+const subject$ = new BehaviorSubject([]);
 
 interval$.subscribe(subject$);
 

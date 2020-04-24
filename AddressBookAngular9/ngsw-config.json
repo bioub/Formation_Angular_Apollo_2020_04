@@ -33,7 +33,7 @@
         "https://jsonplaceholder.typicode.com/**/*"
       ],
       "cacheConfig": {
-        "maxSize": "100",
+        "maxSize": 100,
         "maxAge": "5m",
         "strategy": "performance"
       }

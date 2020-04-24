@@ -25,3 +25,14 @@ interval(1000)
   .subscribe({
     next: () => console.log('1s')
   });
+
+// Redux -> ngrx
+class MyObservable {
+  constructor(cb) {
+    this.cb = cb;
+  }
+
+  subscribe(observer) {
+    this.cb(observer);
+  }
+}
