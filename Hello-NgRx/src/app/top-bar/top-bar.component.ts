@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { selectCount } from '../store/count.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-top-bar',
@@ -7,11 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopBarComponent implements OnInit {
 
-  count = 0;
+  count$: Observable<number>;
 
-  constructor() { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit(): void {
+    this.count$ = this.store.pipe(
+      select(selectCount)
+    );
   }
 
 }

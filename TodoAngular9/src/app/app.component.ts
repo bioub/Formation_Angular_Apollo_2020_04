@@ -8,30 +8,30 @@ import { Todo } from './todo.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  todos: Todo[] = [];
+  // todos: Todo[] = [];
 
-  // private todoService: TodoService;
-  // constructor(todoService: TodoService) {
-  //   this.todoService = todoService;
+  // // private todoService: TodoService;
+  // // constructor(todoService: TodoService) {
+  // //   this.todoService = todoService;
+  // // }
+
+  // constructor(private todoService: TodoService) {}
+
+  // ngOnInit() {
+  //   this.todoService.getAll().subscribe((data) => {
+  //     this.todos = data;
+  //   });
+
   // }
 
-  constructor(private todoService: TodoService) {}
+  // handleNewTodo(todo: Todo) {
+  //   // this.todos.unshift(todo); // changement muable
+  //   this.todos = [todo, ...this.todos]; // changement immuable
+  // }
 
-  ngOnInit() {
-    this.todoService.getAll().subscribe((data) => {
-      this.todos = data;
-    });
-
-  }
-
-  handleNewTodo(todo: Todo) {
-    // this.todos.unshift(todo); // changement muable
-    this.todos = [todo, ...this.todos]; // changement immuable
-  }
-
-  handleDeleteTodo(todo: Todo) {
-    this.todos = this.todos.filter((t) => t.id !== todo.id);
-  }
+  // handleDeleteTodo(todo: Todo) {
+  //   this.todos = this.todos.filter((t) => t.id !== todo.id);
+  // }
 
   ngDoCheck(): void {
     console.log('AppComponent checked');
