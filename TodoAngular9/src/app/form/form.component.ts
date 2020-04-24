@@ -1,5 +1,16 @@
-import { Component, OnInit, EventEmitter, Output, DoCheck, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  DoCheck,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Todo } from '../todo.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/todos.reducers';
+import { selectTodosItems, selectTodosInput } from '../store/selectors.todo';
+import { todosAdd } from '../store/todos.actions';
 
 @Component({
   selector: 'todo-form',
@@ -7,11 +18,7 @@ import { Todo } from '../todo.model';
   styleUrls: ['./form.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormComponent implements DoCheck {
-
-  @Output() add = new EventEmitter<Todo>();
-
-
+export class FormComponent implements DoCheck, OnInit {
   public todo: Todo = {
     title: '',
     completed: false,
@@ -21,16 +28,25 @@ export class FormComponent implements DoCheck {
   //   completed: false,
   // };
 
-  public addTodo() {
-    // emet la référence de l'objet
-    // this.add.emit(this.todo);
+  constructor(private store: Store<AppState>) {}
 
-    // emet la copie de l'objet
-    this.add.emit({...this.todo});
+  ngOnInit() {
+    this.store.select(selectTodosInput).subscribe((input) => {
+      this.todo.title = input;
+    });
   }
 
   ngDoCheck(): void {
     console.log('FormComponent checked');
   }
 
+  addTodo() {
+    // emet la référence de l'objet
+    // this.add.emit(this.todo);
+    // emet la copie de l'objet
+    // this.add.emit({...this.todo});
+    this.store.dispatch(
+      todosAdd({ payload: { ...this.todo, id: Math.random() } })
+    );
+  }
 }
