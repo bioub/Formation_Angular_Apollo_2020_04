@@ -23,3 +23,5 @@
 // depuis TodoList (todoModifyInput)
 
 // Important : ne pas connecter les TodoItem (perf)
+
+// Pensez à installer les devtools
